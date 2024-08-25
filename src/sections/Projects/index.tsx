@@ -21,9 +21,9 @@ export function ProjectsSection(props: PageSection): React.ReactElement {
     const [shownProjects, setShownProjects] = React.useState<number>(
         shouldShowButton ? initiallyShownProjects : section.projects.length,
     );
-
     function loadMoreProjectsHandler() {
         setShownProjects(section.projects.length);
+        section.button.visible = false;
     }
     return (
         <Animation type="fadeIn">
@@ -34,7 +34,7 @@ export function ProjectsSection(props: PageSection): React.ReactElement {
                     })}
                 </Slider>
                 {section.button !== undefined && section.button.visible !== false && (
-                    <Animation className={classes.MoreProjects} type="fadeIn" delay={(shownProjects + 1) * 100}>
+                    <Animation type="fadeIn" delay={(shownProjects + 1) * 100}>
                         <Button
                             type={ButtonType.BUTTON}
                             onClickHandler={loadMoreProjectsHandler}
