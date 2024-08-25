@@ -17,7 +17,7 @@ export function ProjectsSection(props: PageSection): React.ReactElement {
     });
     const section = result ? result.section[0] : allFiles[0].section[0];
     const shouldShowButton = section.button.visible !== false;
-    const initiallyShownProjects = section.button.initiallyShownProjects ?? 5;
+    const initiallyShownProjects = section.button.initiallyShownProjects ?? 3;
     const [shownProjects, setShownProjects] = React.useState<number>(
         shouldShowButton ? initiallyShownProjects : section.projects.length,
     );
@@ -29,12 +29,12 @@ export function ProjectsSection(props: PageSection): React.ReactElement {
         <Animation type="fadeIn">
             <Section anchor={props.sectionId} heading={props.heading}>
                 <Slider additionalClasses={[classes.Projects]}>
-                    {section.projects.map((project, key) => {
+                    {section.projects.slice(0, shownProjects).map((project, key) => {
                         return project.visible ? <Project key={key} index={key} data={project} /> : null;
                     })}
                 </Slider>
                 {section.button !== undefined && section.button.visible !== false && (
-                    <Animation className={classes.MoreProjects} type="fadeIn">
+                    <Animation className={classes.MoreProjects} type="fadeIn" delay={(shownProjects + 1) * 100}>
                         <Button
                             type={ButtonType.BUTTON}
                             onClickHandler={loadMoreProjectsHandler}
