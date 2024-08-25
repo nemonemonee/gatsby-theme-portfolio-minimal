@@ -27,6 +27,6 @@
     "button": {
         "visible": true,
         "label": "",
-        "url": ""
+        "initiallyShownProjects": 5
     }
 }

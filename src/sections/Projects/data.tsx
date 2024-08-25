@@ -8,8 +8,8 @@ interface ProjectsSectionQueryResult {
             relativePath: string;
             section: {
                 button: {
+                    initiallyShownProjects: number;
                     label: string;
-                    url: string;
                     visible: boolean;
                 };
                 projects: Project[];

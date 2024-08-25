@@ -16,7 +16,15 @@ export function ProjectsSection(props: PageSection): React.ReactElement {
         return file.name == fileNameNeedle;
     });
     const section = result ? result.section[0] : allFiles[0].section[0];
+    const shouldShowButton = section.button.visible !== false;
+    const initiallyShownProjects = section.button.initiallyShownProjects ?? 5;
+    const [shownProjects, setShownProjects] = React.useState<number>(
+        shouldShowButton ? initiallyShownProjects : section.projects.length,
+    );
 
+    function loadMoreProjectsHandler() {
+        setShownProjects(section.projects.length);
+    }
     return (
         <Animation type="fadeIn">
             <Section anchor={props.sectionId} heading={props.heading}>
@@ -28,9 +36,8 @@ export function ProjectsSection(props: PageSection): React.ReactElement {
                 {section.button !== undefined && section.button.visible !== false && (
                     <Animation className={classes.MoreProjects} type="fadeIn">
                         <Button
-                            type={ButtonType.LINK}
-                            externalLink={true}
-                            url={section.button.url}
+                            type={ButtonType.BUTTON}
+                            onClickHandler={loadMoreProjectsHandler}
                             label={section.button.label}
                         />
                     </Animation>

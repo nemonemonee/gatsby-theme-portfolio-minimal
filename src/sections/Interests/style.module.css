@@ -40,6 +40,6 @@
 
 @media (min-width: 880px) {
     .Interests {
-        grid-template-columns: repeat(3, 15.625rem);
+        grid-template-columns: repeat(4, 15.625rem);
     }
 }
